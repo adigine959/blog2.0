@@ -20,3 +20,5 @@ def hashtags(request):
 def posts(request):
     data = {'posts': Post.objects.all()}
     return render(request, 'posts.html', context=data)
+
+
