@@ -22,3 +22,11 @@ def posts(request):
     return render(request, 'posts.html', context=data)
 
 
+def post_detail_view(request, **kwargs):
+    if request.method == 'GET':
+        post = Post.objects.get(id=kwargs['id'])
+        data = {
+            'post': post,
+            'comments': Comment.objects.filter(post=post)
+        }
+        return render(request, 'post_detail.html', context=data)

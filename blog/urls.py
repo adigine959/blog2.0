@@ -26,6 +26,8 @@ urlpatterns = [
     path('now_date/', views.now_date),
     path('posts/', views.posts),
     path('hashtags/', views.hashtags),
+    path('posts/<int:id>/', views.post_detail_view)
+
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
