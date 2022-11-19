@@ -4,7 +4,7 @@ from django.db import models
 
 class Hashtag(models.Model):
     title = models.CharField(max_length=500)
-    posts = models.ForeignKey('Post', on_delete=models.CASCADE)
+    posts = models.ManyToManyField('Post')
 
     def __str__(self):
         return self.title
@@ -15,7 +15,7 @@ class Post(models.Model):
     created_time = models.DateTimeField(auto_now_add=True)
     image = models.ImageField()
     likes = models.IntegerField()
-    hashtags = models.ForeignKey(Hashtag, blank=True)
+    hashtags = models.ManyToManyField(Hashtag, blank=True)
 
     def __str__(self):
         return self.title
