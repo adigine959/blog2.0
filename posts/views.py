@@ -1,6 +1,8 @@
 from django.shortcuts import render
 import datetime
 from .models import *
+
+
 def hello(request):
     return render(request, 'hello.html')
 def goodby (request):
@@ -17,9 +19,22 @@ def hashtags(request):
         return render(request, 'hashtags.html', context=data)
 
 
+#def posts(request):
+ #   data = {'posts': Post.objects.all()}
+   # return render(request, 'posts.html', context=data)
 def posts(request):
-    data = {'posts': Post.objects.all()}
-    return render(request, 'posts.html', context=data)
+    if request.method == 'GET':
+        hashtag_id = request.GET.get('hashtag_id')
+        if hashtag_id:
+            hashtag = Hashtag.objects.get(id=hashtag_id)
+            posts = Post.objects.filter(hashtag=hashtag)
+        else:
+            posts = Post.objects.all()
+        data = {
+            'posts': Post.objects.all(),
+            'post': posts
+        }
+        return render(request, 'posts.html', context=data)
 
 
 def post_detail_view(request, **kwargs):
@@ -30,3 +45,4 @@ def post_detail_view(request, **kwargs):
             'comments': Comment.objects.filter(post=post)
         }
         return render(request, 'post_detail.html', context=data)
+
