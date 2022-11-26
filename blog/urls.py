@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path
 from posts import views
 
+from posts.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello/', views.hello),
@@ -26,8 +27,8 @@ urlpatterns = [
     path('now_date/', views.now_date),
     path('posts/', views.posts),
     path('hashtags/', views.hashtags),
-    path('posts/<int:id>/', views.post_detail_view)
-
+    path('posts/<int:id>/', views.post_detail_view),
+    path('posts/create/', post_create_view),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

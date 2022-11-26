@@ -15,6 +15,8 @@ class Post(models.Model):
     created_time = models.DateTimeField(auto_now_add=True)
     image = models.ImageField()
     likes = models.IntegerField()
+    image = models.ImageField(blank=True, null=True)
+    likes = models.IntegerField(default=0)
     hashtags = models.ManyToManyField(Hashtag, blank=True)
 
     def __str__(self):

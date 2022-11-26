@@ -33,6 +33,12 @@
             width: 70%;
             margin-left: 15%;
         }
+         .create_comment {
+             width: 70%;
+             margin-left: 15%;
+             margin-top: 20px;
+             margin-bottom: 20px;
+         }
     </style>
     <div class="post">
         <div class="image">
@@ -48,6 +54,13 @@
                 <p>{{ post.price }}</p>
             </div>
         </div>
+    </div>
+     <div class="create_comment">
+        <form action="/posts/{{ post.id }}/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" class="btn btn-primary" value="Оставьте Комментарий">
+        </form>
     </div>
     <div class="comments">
         {% for comment in comments %}
